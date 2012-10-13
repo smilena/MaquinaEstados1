@@ -17,7 +17,7 @@ var metodoprivado = function(){};
 //comsumible api
 return {
 
-var metodopublico = function (){};
+ metodopublico  :function (){},
 
 }
 
