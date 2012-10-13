@@ -8,17 +8,16 @@
 */
 
 
-var estados = (function (window,undefinied){
+var estados = (function(window, undefinied) {
 
-var variableprivada=0;
+	var variableprivada = 0;
 
-var metodoprivado = function(){};
+	var metodoprivado = function() {};
 
-//comsumible api
-return {
+	//comsumible api
+	return {
 
-var metodopublico = function (){};
+		var metodopublico = function() {};
+	}
 
-}
-
-} )(window,undefinied);
+})(window, undefinied);
