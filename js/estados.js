@@ -8,7 +8,7 @@
 */
 
 
-var estados = (function (window,undefinied){
+var estados = (function (window){
 
 var variableprivada=0;
 
@@ -21,4 +21,4 @@ return {
 
 }
 
-} )(window,undefinied);
+} )(window);
