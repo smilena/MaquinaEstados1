@@ -1,68 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Maquina de estados</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="maquina de estados diseñada para estudiantes y profesores involucrados en el campo de la electronica y las ciencias de la computacion">
+  <meta name="author" content="@smilena89 @danyjavierb">
 
-<!DOCTYPE html> 
-<html lang="es"> 
-  <head> 
-    <meta charset="utf-8"> 
-    <title>Maquina de estados</title> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <meta name="description" content="maquina de estados diseñada para estudiantes y profesores involucrados en el campo de la electronica y las ciencias de la computacion"> 
-    <meta name="author" content="@smilena89 @danyjavierb"> 
- 
-    <!-- Le styles --> 
-    <link href="css/bootstrap.css" rel="stylesheet"> 
-    <style> 
+  <!-- Le styles -->
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <style> 
       body {
         padding-top: 60px; */
+              }
+
+      canvas {
+
+        height: 250px;
+        width: 100%;
+        background-color: #F5F5F5;
+        border: 1px #B9B9B9; 
+      } 
+      #canvas-mask button{
+        font-size: 2em;
+        color:#404040 ;
+        border-radius: 30px;
+        width: 50px;
+        height: 50px;
+        background-color: #FFFFFF;
+
+
       }
-    </style> 
-    
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-      maybe some old teacher are using ie 6
-    <![endif]--> 
- 
-    
-    <link rel="shortcut icon" href="img/favicon.ico"> 
-    
-  </head> 
- 
-  <body> 
- 
-    <div class="navbar navbar-inverse navbar-fixed-top"> 
-      <div class="navbar-inner"> 
-        <div class="container"> 
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 
-            <span class="icon-bar"></span> 
-            <span class="icon-bar"></span> 
-            <span class="icon-bar"></span> 
-          </a> 
-          <a class="brand" style="text-align:justify;" id="app-name" rel ="popover" data-content="Esta aplicacion web fue diseñada para con el objetivo de simular blah blah " data-original-title="Bienvenido" href="#">Maquina de estados</a> 
-          <div class="nav-collapse collapse"> 
-            <ul class="nav"> 
-              <li class="active"><a href="#">Calcular</a></li> 
-              <li><a href="#about">Sobre nosotros</a></li> 
-              <li><a href="#contact">Contactanos</a></li> 
-            </ul> 
-          </div><!--/.nav-collapse --> 
-        </div> 
-      </div> 
-    </div> 
- 
-    <div class="container"> 
- 
-      <h1>Maquina de estados </h1> 
-      <span class="text-warning">Under Development</span>
- 
-    </div> <!-- /container --> 
- 
-    <!-- Le javascript
-    ================================================== --> 
-    <!-- Placed at the end of the document so the pages load faster ; ) --> 
-    <script src="js/utils/jquery-1.8.2.min.js"></script>
-    <script src="js/utils/bootstrap.js"></script> 
-    <script src="js/estados.js"></script>
-    <script src="js/cliente.js"></script>
-     <script >
+      #canvas-mask {
+
+        height: 250px;
+        width: 100%;
+        background-color: #F5F5F5;
+        border: 1px #B9B9B9; 
+      }        
+    </style>
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  maybe some old teacher are using ie 6
+  <![endif]-->
+
+  <link rel="shortcut icon" href="img/favicon.ico"></head>
+
+<body>
+
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" style="text-align:justify;" id="app-name" rel ="popover" data-content="Esta aplicacion web fue diseñada para con el objetivo de simular blah blah " data-original-title="Bienvenido" href="#">Maquina de estados</a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li class="active">
+              <a href="#">Calcular</a>
+            </li>
+            <li>
+              <a href="#about">Sobre nosotros</a>
+            </li>
+            <li>
+              <a href="#contact">Contactanos</a>
+            </li>
+          </ul>
+        </div>
+        <!--/.nav-collapse --> </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <h1>Maquina de estados</h1>
+    <br/>
+
+    <div class="row show-grid">
+      <div class=" span12">
+        <!--se usa un formulario en el caso que fuera necesario enviar
+         los datos a alguna aplicacion de lado del servidor -->
+        <form id="datos-secuencias" class="form-inline">
+          <legend class="text-info lead">Condiciones iniciales</legend>
+          <input type="text" placeholder="Numero de estados">
+          <input type="text" placeholder="Numero de secuencias">
+          <button id="capturar-datos" class=" btn  btn-primary  ">Go!</button>
+          <button type="reset" class="btn btn-inverse">Reset</button>
+        </form>
+
+        <div class="row show-grid">
+          <div class="span8">
+            <span class="muted" id="estado-dibujo-estados">Esperando datos</span>
+            <div id="canvas-mask" style="position:relative;z-index:2">
+              <canvas id="canvas" style="z-index:1">>Ups!, tu navegador no soporta html5</canvas>
+              <span style="position:absolute;left:310px;top:125px;">.</span>
+
+            </div>
+            
+          </div>
+
+          <div class="span4">
+            <form id="captura-secuencias"style ="display:none;">
+              <legend>Fijar Secuencias</legend>
+              <label>Escoger secuencia</label>
+              <div class="input-prepend">
+                <span id="tooltip-ayuda-secuencias"rel="tooltip" data-placement ="left" data-original-title="click para ayuda"class="add-on" >
+                  <a class="btn-link" id="ayuda-secuencias">?</a>
+                  </span>
+                  <select id="lista-secuencias"></select>
+
+                  </div>
+                  <button id="capturar-secuencias" class=" btn  btn-primary  ">Iniciar Captura Secuencia</button>
+                  <button type="reset" class="btn btn-inverse">Reset</button>
+                  </form>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- /container -->
+
+  <!-- Le javascript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster ; ) -->
+  <script src="js/utils/jquery-1.8.2.min.js"></script>
+  <script src="js/utils/bootstrap.js"></script>
+  <script src="js/estados.js"></script>
+  <script src="js/cliente.js"></script>
+  <script >
     jQuery(document).ready(function() {
   $('#app-name').popover({
     placement: "bottom",
@@ -81,9 +153,29 @@ console.log();
     }
   })
 
+//tooltip ayuda secuencias
+
+$('#tooltip-ayuda-secuencias').popover({
+    placement: "bottom",
+    delay: { show: 500, hide: 1000 },
+  });
+console.log();
+
+  $('#tooltip-ayuda-secuencias').bind({
+    "mouseenter": function() {
+      $('#tooltip-ayuda-secuencias').tooltip('show');
+     
+    },
+    "mouseleave": function() {
+      $('#tooltip-ayuda-secuencias').tooltip('hide');
+
+    }
+  })
+
+
 
 });
 
     </script>
-  </body> 
-</html> 
+</body>
+</html>
