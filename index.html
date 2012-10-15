@@ -16,18 +16,24 @@
 
       canvas {
 
-        height: 250px;
+        height: 400px;
         width: 100%;
         background-color: #F5F5F5;
         border: 1px #B9B9B9; 
       } 
       #canvas-mask button{
-        font-size: 2em;
-        color:#404040 ;
-        border-radius: 30px;
-        width: 50px;
-        height: 50px;
-        background-color: #FFFFFF;
+        
+        color:#292929 ;
+        border-radius: 20px;
+     
+        width: 40px;
+        height: 40px;
+        background-color: #EDEDED;
+        font-weight: bold;
+           text-shadow: 0px 1px 0px #999;
+        letter-spacing: 1px;
+        font:1.6em 'ChunkFiveRegular';
+
 
 
       }
@@ -88,16 +94,27 @@
           <legend class="text-info lead">Condiciones iniciales</legend>
           <input type="text" placeholder="Numero de estados">
           <input type="text" placeholder="Numero de secuencias">
-          <button id="capturar-datos" class=" btn  btn-primary  ">Go!</button>
+          
+         <button id="capturar-datos"  class=" btn  btn-primary  ">Go!</button>
+          <span id="error-estados" rel ="popover" data-placement="bottom" data-original-title="¡Ops algo anda mal!" class="text-error">
+          <span id="error-secuencias" rel ="popover" data-placement="right" data-original-title="¡Ops algo anda mal!" class="text-error">
+          
           <button type="reset" class="btn btn-inverse">Reset</button>
+        </span>
+         </span>
+
+           
         </form>
 
         <div class="row show-grid">
           <div class="span8">
-            <span class="muted" id="estado-dibujo-estados">Esperando datos</span>
+            <div id ="alerts"style="display:none;" class="alert fade in">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Bien hecho!</strong> La secuencia ha sido exitosamente almacenada.
+            </div>
             <div id="canvas-mask" style="position:relative;z-index:2">
               <canvas id="canvas" style="z-index:1">>Ups!, tu navegador no soporta html5</canvas>
-              <span style="position:absolute;left:310px;top:125px;">.</span>
+              
 
             </div>
             
@@ -132,6 +149,7 @@
   <!-- Placed at the end of the document so the pages load faster ; ) -->
   <script src="js/utils/jquery-1.8.2.min.js"></script>
   <script src="js/utils/bootstrap.js"></script>
+  <script src="js/flechas.js"></script>
   <script src="js/estados.js"></script>
   <script src="js/cliente.js"></script>
   <script >
