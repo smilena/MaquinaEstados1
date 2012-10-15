@@ -22,12 +22,18 @@
         border: 1px #B9B9B9; 
       } 
       #canvas-mask button{
-        font-size: 1.5em;
-        color:#404040 ;
-        border-radius: 30px;
+        
+        color:#292929 ;
+        border-radius: 20px;
+     
         width: 40px;
         height: 40px;
-        background-color: #FFFFFF;
+        background-color: #EDEDED;
+        font-weight: bold;
+           text-shadow: 0px 1px 0px #999;
+        letter-spacing: 1px;
+        font:1.6em 'ChunkFiveRegular';
+
 
 
       }
@@ -88,8 +94,16 @@
           <legend class="text-info lead">Condiciones iniciales</legend>
           <input type="text" placeholder="Numero de estados">
           <input type="text" placeholder="Numero de secuencias">
-          <button id="capturar-datos" class=" btn  btn-primary  ">Go!</button>
+          
+         <button id="capturar-datos"  class=" btn  btn-primary  ">Go!</button>
+          <span id="error-estados" rel ="popover" data-placement="bottom" data-original-title="¡Ops algo anda mal!" class="text-error">
+          <span id="error-secuencias" rel ="popover" data-placement="right" data-original-title="¡Ops algo anda mal!" class="text-error">
+          
           <button type="reset" class="btn btn-inverse">Reset</button>
+        </span>
+         </span>
+
+           
         </form>
 
         <div class="row show-grid">

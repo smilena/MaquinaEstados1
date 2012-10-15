@@ -1,39 +1,6 @@
 var flechas = (function (window){
 
-var privateMethod=function(){};
-
-    return {
-
-        /*
-        function arrow_initialize(divid, newid) {
-            var par = document.getElementById(divid);
-            var canvas = document.createElement('canvas');
-            canvas.innerHTML = "";
-            canvas.id = newid;
-            canvas.style.position = 'absolute';
-            canvas.width = par.scrollWidth;
-            canvas.height = par.scrollHeight;
-            par.insertBefore(canvas, par.firstChild);
-        };
-        //draw arrow
-
-
-        function arrow(canvas, div1, div1side, div2, div2side, color, lineWidth, shadowColor, shadowBlur) {
-            var canvas = document.getElementById(canvas);
-            var context = canvas.getContext('2d');
-            context.strokeStyle = color;
-            context.lineWidth = lineWidth;
-            context.shadowColor = shadowColor;
-            context.shadowBlur = shadowBlur;
-            context.lineJoin = "round";
-            var dot1 = calccoord(canvas, document.getElementById(div1), div1side);
-            var dot2 = calccoord(canvas, document.getElementById(div2), div2side);
-            draw_arrow(context, dot1.x, dot1.y, dot2.x, dot2.y);
-        }
-        //calculate local canvas coordinates
-*/
-
-        calccoord: function (canvas, div, side) {
+function calccoord (canvas, div, side) {
             var x = 0;
             var y = 0;
             switch(side) {
@@ -63,12 +30,40 @@ var privateMethod=function(){};
                 'x': x,
                 'y': y
             }
+        }
+         
+
+    return {
+
+     
+       arrow_initialize: function (divid, newid) {
+            var par = document.getElementById(divid);
+            var canvas = document.createElement('canvas');
+            canvas.innerHTML = "";
+            canvas.id = newid;
+            canvas.style.position = 'absolute';
+            canvas.width = par.scrollWidth;
+            canvas.height = par.scrollHeight;
+            par.insertBefore(canvas, par.firstChild);
         },
+        //draw arrow
 
-        //drawing arrow
 
+       arrow: function (canvas, div1, div1side, div2, div2side, color, lineWidth, shadowColor, shadowBlur) {
+            var canvas = document.getElementById(canvas);
+            var context = canvas.getContext('2d');
+            context.strokeStyle = color;
+            context.lineWidth = lineWidth;
+            context.shadowColor = shadowColor;
+            context.shadowBlur = shadowBlur;
+            context.lineJoin = "round";
+            var dot1 = calccoord(canvas, document.getElementById(div1), div1side);
+            var dot2 = calccoord(canvas, document.getElementById(div2), div2side);
+            draw_arrow(context, dot1.x, dot1.y, dot2.x, dot2.y);
+        },
+        //calculate local canvas coordinates
 
-       draw_arrow: function (context, fromx, fromy, tox, toy) {
+        draw_arrow:function  (context, fromx, fromy, tox, toy) {
             var headlen = 9;
             var dx = tox - fromx;
             var dy = toy - fromy;
@@ -81,6 +76,12 @@ var privateMethod=function(){};
             context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
             context.stroke();
         },
+        
+
+        //drawing arrow
+
+
+       
     }
 
 })(window) ;
