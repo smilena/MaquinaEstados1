@@ -1,43 +1,49 @@
 //rutinas validacion,interacion y despliegue de resultados de la app
 //author: @danyjavierb @smilena89
 
-
 jQuery(document).ready(function() {
-  $('#app-name').popover({
-    placement: "bottom",
-    delay: { show: 500, hide: 1000 },
-  });
-console.log();
 
-  $('#app-name').bind({
-    "click": function() {
-      $('#app-name').popover('show');
-     
-    },
-    "mouseleave": function() {
-      $('#app-name').popover('hide');
 
-    }
-  })
+	$('#app-name').popover({
+		placement: "bottom",
+		delay: {
+			show: 500,
+			hide: 1000
+		},
+	});
+	console.log();
 
-//tooltip ayuda secuencias
+	$('#app-name').bind({
+		"click": function() {
+			$('#app-name').popover('show');
 
-$('#tooltip-ayuda-secuencias').popover({
-    placement: "bottom",
-    delay: { show: 500, hide: 1000 },
-  });
-console.log();
+		},
+		"mouseleave": function() {
+			$('#app-name').popover('hide');
 
-  $('#tooltip-ayuda-secuencias').bind({
-    "mouseenter": function() {
-      $('#tooltip-ayuda-secuencias').tooltip('show');
-     
-    },
-    "mouseleave": function() {
-      $('#tooltip-ayuda-secuencias').tooltip('hide');
+		}
+	})
 
-    }
-  })
+	//tooltip ayuda secuencias
+	$('#tooltip-ayuda-secuencias').popover({
+		placement: "bottom",
+		delay: {
+			show: 500,
+			hide: 1000
+		},
+	});
+	console.log();
+
+	$('#tooltip-ayuda-secuencias').bind({
+		"mouseenter": function() {
+			$('#tooltip-ayuda-secuencias').tooltip('show');
+
+		},
+		"mouseleave": function() {
+			$('#tooltip-ayuda-secuencias').tooltip('hide');
+
+		}
+	})
 
 
 
@@ -45,6 +51,8 @@ console.log();
 
 //rutinas logica de presentacion
 $(function() {
+	
+
 	//rutinas validacion datos Nestados,Nsecuencias y captura entradas usuario
 	$("#capturar-datos").bind("click", function(ev) {
 		ev.preventDefault();
@@ -55,52 +63,57 @@ $(function() {
 		numeroEstados = Number(camposEntradas.eq(0).val());
 		numeroSecuencias = Number(camposEntradas.eq(1).val());
 
-		
-		var error=false;
-		if($.isNumeric(numeroEstados)==false || $.isNumeric(numeroEstados)==false|| numeroEstados<=0 ||numeroEstados>16 ) {
-			error=true;
+
+		var error = false;
+		if($.isNumeric(numeroEstados) == false || $.isNumeric(numeroEstados) == false || numeroEstados <= 0 || numeroEstados > 16) {
+			error = true;
 			$("#error-estados").popover({
-				content:"El numero de estados debe ser un dato numerico, que este en el intervalo [0,16]",
-				delay:{show:4000,hide:500},
+				content: "El numero de estados debe ser un dato numerico, que este en el intervalo [0,16]",
+				delay: {
+					show: 4000,
+					hide: 500
+				},
 
 			});
-				
-				$("#error-estados").popover("show");
-				$("#capturar-datos").bind("mouseleave",function(){
 
-					$("#error-estados").popover("hide");
+			$("#error-estados").popover("show");
+			$("#capturar-datos").bind("mouseleave", function() {
 
-					camposEntradas.eq(0).val(null);
-					$("#error-estados").popover("destroy");
+				$("#error-estados").popover("hide");
+
+				camposEntradas.eq(0).val(null);
+				$("#error-estados").popover("destroy");
 
 
-				});
+			});
 
-			
-		}
-		else if($.isNumeric(numeroSecuencias)==false || $.isNumeric(numeroSecuencias)==false|| numeroSecuencias<=0 || (numeroSecuencias>=numeroEstados) ) {
-			error=true;
+
+		} else if($.isNumeric(numeroSecuencias) == false || $.isNumeric(numeroSecuencias) == false || numeroSecuencias <= 0 || (numeroSecuencias >= numeroEstados)) {
+			error = true;
 			$("#error-secuencias").popover({
-				content:"El numero de secuencias debe ser un dato numerico, y que sea menor que el numero de estados",
-				delay:{show:4000,hide:500},
+				content: "El numero de secuencias debe ser un dato numerico, y que sea menor que el numero de estados",
+				delay: {
+					show: 4000,
+					hide: 500
+				},
 
 			});
-				
-				$("#error-secuencias").popover("show");
-				$("#capturar-datos").bind("mouseleave",function(){
 
-					$("#error-secuencias").popover("hide");
-					camposEntradas.eq(1).val(null);
-					$("#error-secuencias").popover("destroy");
+			$("#error-secuencias").popover("show");
+			$("#capturar-datos").bind("mouseleave", function() {
+
+				$("#error-secuencias").popover("hide");
+				camposEntradas.eq(1).val(null);
+				$("#error-secuencias").popover("destroy");
 
 
-				});
+			});
 
-			
+
 		}
 
 
-		 if(error==false) {
+		if(error == false) {
 			//todo va bien, dibujar estados y empezar rutinas de campura de secuencias
 			iniciarCapturaSecuencias(numeroSecuencias);
 			dibujarEstados(numeroEstados);
@@ -115,15 +128,15 @@ function dibujarEstados(numero) {
 
 	var canvas = $("#canvas-mask");
 	var r = 20;
-	var radio = 100; //cte para muchos
+	var radio = 50; //cte para muchos
 	var angulo = (2 * (Math.PI)) / numero;
 	var anchoCanvas = canvas.width();
 
 	var altoCanvas = canvas.height();
 	for(var i = 0; i < numero; i++) {
 
-		var x = (radio*numero/2 ) * (Math.cos(angulo * i));
-		var y = (radio *numero/2) * (Math.sin(angulo * i));
+		var x = (radio * numero / 2) * (Math.cos(angulo * i));
+		var y = (radio * numero / 2) * (Math.sin(angulo * i));
 		//moviendo a sistema de coordenadas en centro del canvas
 		x += (anchoCanvas / 2);
 		y += (altoCanvas / 2);
@@ -147,13 +160,24 @@ function dibujarEstados(numero) {
 }
 
 function iniciarCapturaSecuencias(numero) {
-	window.secuencias = [];
-	window.coloresSecuencias=[];
+window.secuencias = [];
+	window.coloresSecuencias = [];
+	
+//canvas
+	var canvas = document.getElementById("canvas");
+	var canvasLayer = document.getElementById("canvas-mask");
+
+	canvas.width = canvasLayer.scrollWidth;
+	canvas.height = canvasLayer.scrollHeight;
+	canvas.style.position = 'absolute';
+
+	var context = canvas.getContext('2d');
+	
 	$("#captura-secuencias").fadeIn(2000);
 	for(var i = 0; i < numero; i++) {
-		window.coloresSecuencias[i]= random_hexa_color();
+		window.coloresSecuencias[i] = random_hexa_color();
 		console.log(coloresSecuencias[i]);
-		var secuenciaTemp = $("<option style='color:"+window.coloresSecuencias[i] +"; font-weight: bold;' id=s" + i + ">Secuencia " + (i + 1) + "</option>");
+		var secuenciaTemp = $("<option style='color:" + window.coloresSecuencias[i] + "; font-weight: bold;' id=s" + i + ">Secuencia " + (i + 1) + "</option>");
 		$('#lista-secuencias').append(secuenciaTemp);
 	}
 	var capturando = false;
@@ -183,111 +207,83 @@ function iniciarCapturaSecuencias(numero) {
 
 				$(this).bind("click", function() {
 
-					if(origen==null){
-							origen = Number($(this).attr("id")[1]);
-							console.log("origen"+origen);
+					if(origen == null) {
+						origen = Number($(this).attr("id")[1]);
+						console.log("origen" + origen);
+					} else if(origen != null && destino == null) {
+
+						destino = Number($(this).attr("id")[1]);
+						console.log("destino" + destino);
 					}
-					else if (origen!=null && destino==null) {
-
-						destino =  Number($(this).attr("id")[1]);
-						console.log("destino"+destino);
-					}
-
-					
 
 
-					if($.inArray($(this).attr("id")[1], secuenciaActual) > -1 ) {
+
+					if($.inArray($(this).attr("id")[1], secuenciaActual) > -1) {
 
 						//ah ah ya esta este destino
 						console.log("ah ah ya esta");
 					} else {
 
-						
-						if(origen!=null&&destino!=null){
 
-							console.log("dibujando flecha de s"+origen +" a s"+destino);
+						if(origen != null && destino != null) {
+
+							console.log("dibujando flecha de s" + origen + " a s" + destino);
 							//dibujo flechas
-							var elOrigen= $("#e"+""+origen);
-							var elDestino=$("#e"+""+destino);
-							var x1=elOrigen.position().left;
-							var y1=elOrigen.position().top;
-							var x2=elDestino.position().left;
-							var y2=elDestino.position().top;
+							var elOrigen = $("#e" + "" + origen);
+							var elDestino = $("#e" + "" + destino);
+							var x1 = elOrigen.position().left;
+							var y1 = elOrigen.position().top;
+							var x2 = elDestino.position().left;
+							var y2 = elDestino.position().top;
 
 							//radio circulos
-
 
 							var r = 20;
 
 							//calculo puntos iniciales y finales a partir de las coordenadas de los botones
-
-							var teta = (180/Math.PI) * Math.atan((y2-y1)/(x2-x1)); 
+							var teta = (180 / Math.PI) * Math.atan((y2 - y1) / (x2 - x1));
 
 							if(x2 > x1) {
-							var inicialX = x1 + r + (r * Math.cos(teta));
-							var finalX =x2 + r - (r * Math.cos(teta));
+								var inicialX = x1 + r + (r * Math.cos(teta));
+								var finalX = x2 + r - (r * Math.cos(teta));
 
 							}
 							if(x1 > x2) {
-							var inicialX = x1 + r - (r * Math.cos(teta));
-							var finalX =x2 + r + (r * Math.cos(teta));
+								var inicialX = x1 + r - (r * Math.cos(teta));
+								var finalX = x2 + r + (r * Math.cos(teta));
 
 
 							}
-							
-							if(y2>y1){
+
+							if(y2 > y1) {
 								var inicialY = y1 + r + (r * Math.sin(teta));
-								var finalY= y2 + r - (r*Math.sin(teta));
+								var finalY = y2 + r - (r * Math.sin(teta));
 
-							}	
+							}
 
-							if(y1>y2){
+							if(y1 > y2) {
 
-							var inicialY = y1 + r - (r * Math.sin(teta));
-							var finalY= y2 + r + (r*Math.sin(teta));
+								var inicialY = y1 + r - (r * Math.sin(teta));
+								var finalY = y2 + r + (r * Math.sin(teta));
 
 
 							}
 
-							if(x1==x2){
-							var inicialX = x1 + r ;
-							var finalY= y1 + r;
+							if(x1 == x2) {
+								var inicialX = x1 + r;
+								var finalY = y1 + r;
 							}
 
-							if(y1==y2){
+							if(y1 == y2) {
 								var inicialY = y1 + r;
-								var finalY= y1 + r;
+								var finalY = y1 + r;
 
 
 							}
 
 
-							
 
-
-							var canvas = document.getElementById("canvas");
-							var canvasLayer = document.getElementById("canvas-mask");
-
-							canvas.width=canvasLayer.scrollWidth;
-							canvas.height=canvasLayer.scrollHeight;
-							canvas.style.position = 'absolute';
-
-							var context = canvas.getContext('2d');
-
-
-
-   
-
-
-
-
-
-
-
-							
-
-							flechas.draw_arrow(context,inicialX,inicialY,finalX,finalY);
-
+							flechas.draw_arrow(context, inicialX, inicialY, finalX, finalY);
 
 
 
@@ -328,22 +324,22 @@ function iniciarCapturaSecuencias(numero) {
 
 }
 
-function random_hexa_color(){
+function random_hexa_color() {
 
-var r= Math.round((Math.random()*89)+10);
-var g= Math.round((Math.random()*89)+10);
-var b = Math.round((Math.random()*89)+10);
-var hexa= "#"+r+""+g+""+b;
-return hexa;
+	var r = Math.round((Math.random() * 89) + 10);
+	var g = Math.round((Math.random() * 89) + 10);
+	var b = Math.round((Math.random() * 89) + 10);
+	var hexa = "#" + r + "" + g + "" + b;
+	return hexa;
 }
 
 
-function cambioBit(string1, string2){
-       var contador=0;
-       for(var i=0;i<string1.length;i++){
-               if(string1.charAt(i)!=string2.charAt(i)){
-                       contador++;
-               }
-       }
-       return contador;
+function cambioBit(string1, string2) {
+	var contador = 0;
+	for(var i = 0; i < string1.length; i++) {
+		if(string1.charAt(i) != string2.charAt(i)) {
+			contador++;
+		}
+	}
+	return contador;
 }
