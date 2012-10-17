@@ -9,41 +9,9 @@
 
   <!-- Le styles -->
   <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/style-states.css" rel="stylesheet">
   <style> 
-      body {
-        padding-top: 60px; */
-              }
-
-      canvas {
-
-        height: 400px;
-        width: 100%;
-        background-color: #F5F5F5;
-        border: 1px #B9B9B9; 
-      } 
-      #canvas-mask button{
-        
-        color:#292929 ;
-        border-radius: 20px;
      
-        width: 40px;
-        height: 40px;
-        background-color: #EDEDED;
-        font-weight: bold;
-           text-shadow: 0px 1px 0px #999;
-        letter-spacing: 1px;
-        font:1.6em 'ChunkFiveRegular';
-
-
-
-      }
-      #canvas-mask {
-
-        height: 250px;
-        width: 100%;
-        background-color: #F5F5F5;
-        border: 1px #B9B9B9; 
-      }        
     </style>
 
   <!--[if lt IE 9]>
@@ -51,7 +19,9 @@
   maybe some old teacher are using ie 6
   <![endif]-->
 
-  <link rel="shortcut icon" href="img/favicon.ico"></head>
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+</head>
 
 <body>
 
@@ -112,7 +82,7 @@
             <button type="button" class="close" data-dismiss="alert">×</button>
             <strong>Bien hecho!</strong> La secuencia ha sido exitosamente almacenada.
             </div>
-            <div id="canvas-mask" style="position:relative;z-index:2">
+            <div id="canvas-mask" style="position:relative;height:400px;z-index:2">
               <canvas id="canvas" style="z-index:1">>Ups!, tu navegador no soporta html5</canvas>
               
 
@@ -153,46 +123,7 @@
   <script src="js/estados.js"></script>
   <script src="js/cliente.js"></script>
   <script >
-    jQuery(document).ready(function() {
-  $('#app-name').popover({
-    placement: "bottom",
-    delay: { show: 500, hide: 1000 },
-  });
-console.log();
-
-  $('#app-name').bind({
-    "click": function() {
-      $('#app-name').popover('show');
-     
-    },
-    "mouseleave": function() {
-      $('#app-name').popover('hide');
-
-    }
-  })
-
-//tooltip ayuda secuencias
-
-$('#tooltip-ayuda-secuencias').popover({
-    placement: "bottom",
-    delay: { show: 500, hide: 1000 },
-  });
-console.log();
-
-  $('#tooltip-ayuda-secuencias').bind({
-    "mouseenter": function() {
-      $('#tooltip-ayuda-secuencias').tooltip('show');
-     
-    },
-    "mouseleave": function() {
-      $('#tooltip-ayuda-secuencias').tooltip('hide');
-
-    }
-  })
-
-
-
-});
+    
 
     </script>
 </body>
