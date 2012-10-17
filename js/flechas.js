@@ -68,6 +68,12 @@ function calccoord (canvas, div, side) {
             var dx = tox - fromx;
             var dy = toy - fromy;
             var angle = Math.atan2(dy, dx);
+
+            context.strokeStyle = "black";
+            context.lineWidth = 1;
+            context.shadowColor = "black";
+            context.shadowBlur = 4;
+            context.lineJoin = "round";
             context.beginPath();
             context.moveTo(fromx, fromy);
             context.lineTo(tox, toy);

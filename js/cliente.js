@@ -122,8 +122,8 @@ function dibujarEstados(numero) {
 	var altoCanvas = canvas.height();
 	for(var i = 0; i < numero; i++) {
 
-		var x = (radio + numero * 3) * (Math.cos(angulo * i));
-		var y = (radio + numero) * (Math.sin(angulo * i));
+		var x = (radio*numero/2 ) * (Math.cos(angulo * i));
+		var y = (radio *numero/2) * (Math.sin(angulo * i));
 		//moviendo a sistema de coordenadas en centro del canvas
 		x += (anchoCanvas / 2);
 		y += (altoCanvas / 2);
@@ -132,7 +132,7 @@ function dibujarEstados(numero) {
 		y += r;
 
 
-		var estadoTemp = $("<button style='display:none;position:absolute; left:" + 0 + "px ;top:" + 0 + "px;' id=e" + i + ">s" + (i) + "</button>");
+		var estadoTemp = $("<button style='display:none;z-index:3;position:absolute; left:" + 0 + "px ;top:" + 0 + "px;' id=e" + i + ">s" + (i) + "</button>");
 		canvas.append(estadoTemp);
 
 		estadoTemp.fadeIn(1000);
@@ -207,10 +207,86 @@ function iniciarCapturaSecuencias(numero) {
 
 							console.log("dibujando flecha de s"+origen +" a s"+destino);
 							//dibujo flechas
-							var elOrigen= $("#s"+""+origen);
-							var elDestino=$("#s"+""+destino);
+							var elOrigen= $("#e"+""+origen);
+							var elDestino=$("#e"+""+destino);
+							var x1=elOrigen.position().left;
+							var y1=elOrigen.position().top;
+							var x2=elDestino.position().left;
+							var y2=elDestino.position().top;
 
-							flechas.arrow("canvas","s"+""+origen,4,"s"+""+destino,4,"black",2,"red",2);
+							//radio circulos
+
+
+							var r = 20;
+
+							//calculo puntos iniciales y finales a partir de las coordenadas de los botones
+
+							var teta = (180/Math.PI) * Math.atan((y2-y1)/(x2-x1)); 
+
+							if(x2 > x1) {
+							var inicialX = x1 + r + (r * Math.cos(teta));
+							var finalX =x2 + r - (r * Math.cos(teta));
+
+							}
+							if(x1 > x2) {
+							var inicialX = x1 + r - (r * Math.cos(teta));
+							var finalX =x2 + r + (r * Math.cos(teta));
+
+
+							}
+							
+							if(y2>y1){
+								var inicialY = y1 + r + (r * Math.sin(teta));
+								var finalY= y2 + r - (r*Math.sin(teta));
+
+							}	
+
+							if(y1>y2){
+
+							var inicialY = y1 + r - (r * Math.sin(teta));
+							var finalY= y2 + r + (r*Math.sin(teta));
+
+
+							}
+
+							if(x1==x2){
+							var inicialX = x1 + r ;
+							var finalY= y1 + r;
+							}
+
+							if(y1==y2){
+								var inicialY = y1 + r;
+								var finalY= y1 + r;
+
+
+							}
+
+
+							
+
+
+							var canvas = document.getElementById("canvas");
+							var canvasLayer = document.getElementById("canvas-mask");
+
+							canvas.width=canvasLayer.scrollWidth;
+							canvas.height=canvasLayer.scrollHeight;
+							canvas.style.position = 'absolute';
+
+							var context = canvas.getContext('2d');
+
+
+
+   
+
+
+
+
+
+
+
+							
+
+							flechas.draw_arrow(context,inicialX,inicialY,finalX,finalY);
 
 
 
@@ -259,4 +335,15 @@ var g= Math.round((Math.random()*89)+10);
 var b = Math.round((Math.random()*89)+10);
 var hexa= "#"+r+""+g+""+b;
 return hexa;
+}
+
+
+function cambioBit(string1, string2){
+       var contador=0;
+       for(var i=0;i<string1.length;i++){
+               if(string1.charAt(i)!=string2.charAt(i)){
+                       contador++;
+               }
+       }
+       return contador;
 }
