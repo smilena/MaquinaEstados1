@@ -77,12 +77,12 @@
         </form>
 
         <div class="row show-grid">
-          <div class="span8">
+          <div class="span9">
             <div id ="alerts"style="display:none;" class="alert fade in">
             <button type="button" class="close" data-dismiss="alert">×</button>
             <strong>Bien hecho!</strong> La secuencia ha sido exitosamente almacenada.
             </div>
-            <div id="canvas-mask" style="position:relative;height:400px;z-index:2">
+            <div id="canvas-mask" style="position:relative;height:500px;z-index:2">
               <canvas id="canvas" style="z-index:1">>Ups!, tu navegador no soporta html5</canvas>
               
 
@@ -90,7 +90,7 @@
             
           </div>
 
-          <div class="span4">
+          <div class="span3">
             <form id="captura-secuencias"style ="display:none;">
               <legend>Fijar Secuencias</legend>
               <label>Escoger secuencia</label>
@@ -104,6 +104,10 @@
                   <button id="capturar-secuencias" class=" btn  btn-primary  ">Iniciar Captura Secuencia</button>
                   <button type="reset" class="btn btn-inverse">Reset</button>
                   </form>
+                      <div id="respuesta"class="alert alert-success" style="display:none;">
+    ...                 <strong> ¡Muy bien!</strong>
+                        <span></span>
+                      </div>
 
 
           </div>
