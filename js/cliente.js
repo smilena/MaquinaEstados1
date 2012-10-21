@@ -127,22 +127,22 @@ $(function() {
 function dibujarEstados(numero) {
 
 	var canvas = $("#canvas-mask");
-	var r = 20;
-	var radio = 50; //cte para muchos
+	var r = 40;
+	var radio = 15; //cte para muchos
 	var angulo = (2 * (Math.PI)) / numero;
 	var anchoCanvas = canvas.width();
 
 	var altoCanvas = canvas.height();
 	for(var i = 0; i < numero; i++) {
 
-		var x = (radio * numero / 2) * (Math.cos(angulo * i));
-		var y = (radio * numero / 2) * (Math.sin(angulo * i));
+		var x = (radio+(numero*10))  * (Math.cos(angulo*i ));
+		var y = (radio+(numero*10))  * (Math.sin(angulo*i ));
 		//moviendo a sistema de coordenadas en centro del canvas
 		x += (anchoCanvas / 2);
 		y += (altoCanvas / 2);
-		//ajustando posiciones al centro de los circulos con radio  25px
-		x += r;
-		y += r;
+		//ajustando posiciones al centro de los circulos con radio  20px
+		x += r* (Math.cos(angulo*i ));
+		y += r* (Math.sin(angulo*i ));
 
 
 		var estadoTemp = $("<button style='display:none;z-index:3;position:absolute; left:" + 0 + "px ;top:" + 0 + "px;' id=e" + i + ">s" + (i) + "</button>");
@@ -153,7 +153,7 @@ function dibujarEstados(numero) {
 			left: x,
 			top: y,
 
-		}, numero * 250);
+		}, numero * x);
 	}
 
 
@@ -162,7 +162,7 @@ function dibujarEstados(numero) {
 function iniciarCapturaSecuencias(numero) {
 window.secuencias = [];
 	window.coloresSecuencias = [];
-	
+
 //canvas
 	var canvas = document.getElementById("canvas");
 	var canvasLayer = document.getElementById("canvas-mask");
@@ -177,7 +177,7 @@ window.secuencias = [];
 	for(var i = 0; i < numero; i++) {
 		window.coloresSecuencias[i] = random_hexa_color();
 		console.log(coloresSecuencias[i]);
-		var secuenciaTemp = $("<option style='color:" + window.coloresSecuencias[i] + "; font-weight: bold;' id=s" + i + ">Secuencia " + (i + 1) + "</option>");
+		var secuenciaTemp = $("<option style='color:" + window.coloresSecuencias[i] + "; font-weight: bold;' id=s" + i + " ><strong>Secuencia " + (i + 1) + "</strong></option>");
 		$('#lista-secuencias').append(secuenciaTemp);
 	}
 	var capturando = false;
@@ -241,49 +241,73 @@ window.secuencias = [];
 							var r = 20;
 
 							//calculo puntos iniciales y finales a partir de las coordenadas de los botones
-							var teta = (180 / Math.PI) * Math.atan((y2 - y1) / (x2 - x1));
+							var teta = Math.abs(Math.atan((y2 - y1) / (x2 - x1)));
 
-							if(x2 > x1) {
+							if(x1<x2 && y1>y2 ) {
 								var inicialX = x1 + r + (r * Math.cos(teta));
+								var inicialY = y1 + r - (r * Math.sin(teta));
 								var finalX = x2 + r - (r * Math.cos(teta));
-
+								
+								var finalY = y2 + r + (r * Math.sin(teta));
 							}
-							if(x1 > x2) {
+							if(x1 > x2&&y1<y2) {
 								var inicialX = x1 + r - (r * Math.cos(teta));
-								var finalX = x2 + r + (r * Math.cos(teta));
-
-
-							}
-
-							if(y2 > y1) {
 								var inicialY = y1 + r + (r * Math.sin(teta));
+								var finalX = x2 + r + (r * Math.cos(teta));
 								var finalY = y2 + r - (r * Math.sin(teta));
 
+
 							}
+							if(x1 < x2&&y1<y2) {
+								var inicialX = x1 + r + (r * Math.cos(teta));
+								var inicialY = y1 + r + (r * Math.sin(teta));
+								var finalX = x2 + r - (r * Math.cos(teta));
+								var finalY = y2 + r - (r * Math.sin(teta));
 
-							if(y1 > y2) {
 
+							}
+							if(x1 > x2&&y1>y2) {
+								var inicialX = x1 + r - (r * Math.cos(teta));
 								var inicialY = y1 + r - (r * Math.sin(teta));
+								var finalX = x2 + r + (r * Math.cos(teta));
 								var finalY = y2 + r + (r * Math.sin(teta));
 
 
 							}
 
+							
+
 							if(x1 == x2) {
 								var inicialX = x1 + r;
-								var finalY = y1 + r;
+								var finalX = x2 + r;
+								if(y1<y2){
+									var inicialY=y1+2*r;
+									var finalY=y2;
+								}else{
+									var inicialY=y1;
+									var finalY=y2+2*r;
+								}
+
+
 							}
 
 							if(y1 == y2) {
 								var inicialY = y1 + r;
-								var finalY = y1 + r;
+								var finalY = y2 + r;
+								if(x1<x2){
+									var inicialX=x1+2*r;
+									var finalX=x2;
+								}else{
+									var inicialX=x1;
+									var finalX=x2+2*r;
+								}
 
 
 							}
 
 
-
-							flechas.draw_arrow(context, inicialX, inicialY, finalX, finalY);
+							var color = window.coloresSecuencias[indiceSecuencia];
+							flechas.draw_arrow(context,color, inicialX, inicialY, finalX, finalY);
 
 
 
@@ -304,16 +328,27 @@ window.secuencias = [];
 			capturando = false;
 
 			$("#alerts").fadeIn(1000).fadeOut(2000); //temporal ->modal debe usarse
-			$("#capturar-secuencias").text("Fijar secuencia actual...").removeClass("btn-warning").addClass("btn-primary");
+			$("#capturar-secuencias").text("Iniciar captura secuencia").removeClass("btn-warning").addClass("btn-primary");
 
 			secuenciaActual.shift();
 			window.secuencias[indiceSecuencia] = secuenciaActual;
 			console.log(secuenciaActual);
 			console.log(window.secuencias);
 			$("#s" + indiceSecuencia).remove();
-
+			$("#canvas-mask button").unbind("click");
 			secuenciaActual = [];
 			indiceSecuencia = null;
+			origen=null;
+			destino=null;
+
+			//no hay mas secuencias para capturar, por tanto, se procede a calcular la ecuacion
+			if($("#lista-secuencias option").length ==0){
+				$("#canvas-mask button").each(function() {$(this).unbind("click");});
+					$("#capturar-secuencias").text("MostrarResultado").removeClass("btn-warning").addClass("btn-primary").unbind("click").bind("click",resultado());
+
+
+
+			}
 
 
 		}
@@ -326,11 +361,12 @@ window.secuencias = [];
 
 function random_hexa_color() {
 
-	var r = Math.round((Math.random() * 89) + 10);
-	var g = Math.round((Math.random() * 89) + 10);
-	var b = Math.round((Math.random() * 89) + 10);
-	var hexa = "#" + r + "" + g + "" + b;
-	return hexa;
+	var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+        for (var i = 0; i < 6; i++ ) {
+            color += letters[Math.round(Math.random() * 15)];
+        }
+        return color;
 }
 
 
@@ -343,3 +379,12 @@ function cambioBit(string1, string2) {
 	}
 	return contador;
 }
+
+function resultado(){
+
+//secuencias estan en window.secuencias
+
+$("#respuesta span")[0].html("la ecuacion es: " + "e=mc²").fadeIn(1000);
+
+
+};

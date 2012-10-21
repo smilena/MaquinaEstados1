@@ -63,14 +63,14 @@ function calccoord (canvas, div, side) {
         },
         //calculate local canvas coordinates
 
-        draw_arrow:function  (context, fromx, fromy, tox, toy) {
+        draw_arrow:function  (context,color, fromx, fromy, tox, toy) {
             var headlen = 9;
             var dx = tox - fromx;
             var dy = toy - fromy;
             var angle = Math.atan2(dy, dx);
 
-            context.strokeStyle = "black";
-            context.lineWidth = 1;
+            context.strokeStyle = color;
+            context.lineWidth = 2;
             context.shadowColor = "black";
             context.shadowBlur = 4;
             context.lineJoin = "round";
