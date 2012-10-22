@@ -11,8 +11,7 @@ jQuery(document).ready(function() {
 			hide: 1000
 		},
 	});
-	console.log();
-
+	
 	$('#app-name').bind({
 		"click": function() {
 			$('#app-name').popover('show');
@@ -34,13 +33,13 @@ jQuery(document).ready(function() {
 	});
 	console.log();
 
-	$('#tooltip-ayuda-secuencias').bind({
+	$('#tooltip-ayuda-secuencias,#tooltip-flip').bind({
 		"mouseenter": function() {
-			$('#tooltip-ayuda-secuencias').tooltip('show');
+			$(this).tooltip('show');
 
 		},
 		"mouseleave": function() {
-			$('#tooltip-ayuda-secuencias').tooltip('hide');
+			$(this).tooltip('hide');
 
 		}
 	})
@@ -236,9 +235,15 @@ window.secuencias = [];
 							var x2 = elDestino.position().left;
 							var y2 = elDestino.position().top;
 
+							
+
 							//radio circulos
 
 							var r = 20;
+
+							//inflexion curvas
+
+							var nivel = {};
 
 							//calculo puntos iniciales y finales a partir de las coordenadas de los botones
 							var teta = Math.abs(Math.atan((y2 - y1) / (x2 - x1)));
@@ -249,6 +254,17 @@ window.secuencias = [];
 								var finalX = x2 + r - (r * Math.cos(teta));
 								
 								var finalY = y2 + r + (r * Math.sin(teta));
+
+								nivel.x=inicialX;
+								nivel.y=inicialY;
+
+								nivel.x-= (Math.abs((finalX-inicialX)/2))*(indiceSecuencia*Math.pow(-1,indiceSecuencia));
+								nivel.y-= (Math.abs((finalY-inicialY )/2))*(indiceSecuencia*Math.pow(-1,indiceSecuencia));
+								
+
+
+
+
 							}
 							if(x1 > x2&&y1<y2) {
 								var inicialX = x1 + r - (r * Math.cos(teta));
@@ -305,13 +321,14 @@ window.secuencias = [];
 
 							}
 
+								//dibujado 
 
 							var color = window.coloresSecuencias[indiceSecuencia];
-							flechas.draw_arrow(context,color, inicialX, inicialY, finalX, finalY);
+							flechas.draw_arrow(context,color,nivel, inicialX, inicialY, finalX, finalY);
 
 
 
-							origen = destino;
+							origen = null;
 							destino = null;
 						}
 

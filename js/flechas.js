@@ -62,8 +62,8 @@ function calccoord (canvas, div, side) {
             draw_arrow(context, dot1.x, dot1.y, dot2.x, dot2.y);
         },
         //calculate local canvas coordinates
-
-        draw_arrow:function  (context,color, fromx, fromy, tox, toy) {
+        /*
+        draw_arrow:function  (context,color,nivel, fromx, fromy, tox, toy) {
             var headlen = 9;
             var dx = tox - fromx;
             var dy = toy - fromy;
@@ -81,8 +81,31 @@ function calccoord (canvas, div, side) {
             context.lineTo(tox, toy);
             context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
             context.stroke();
+        },*/
+        draw_arrow:function  (context,color,nivel, fromx, fromy, tox, toy) {
+            var headlen = 9;
+            var dx = tox - fromx;
+            var dy = toy - fromy;
+            var angle = Math.atan2(dy, dx);
+
+            context.strokeStyle = color;
+            context.lineWidth = 2;
+            context.shadowColor = "black";
+            context.shadowBlur = 4;
+            context.lineJoin = "round";
+            context.beginPath();
+            context.moveTo(fromx, fromy);
+
+
+
+            context.quadraticCurveTo(nivel.x,nivel.y,tox,toy);
+            //flecha
+            context.moveTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
+            context.lineTo(tox, toy);
+            context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
+            context.stroke();
         },
-        
+
 
         //drawing arrow
 
