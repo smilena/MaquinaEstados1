@@ -33,11 +33,14 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <a class="brand" style="text-align:justify;" id="app-name" rel ="popover" data-content="Esta aplicacion web fue diseñada para con el objetivo de simular blah blah " data-original-title="Bienvenido" href="#">Maquina de estados</a>
+        <a class="brand" style="text-align:justify;" id="app-name" rel ="popover" data-content="Esta aplicación web fue diseñada con el objetivo de simular una maquina de estados finitos, donde el usuario elige el tipo de flip flop con que se va a realizar el proceso de formación de la ecuación para cada variable." data-original-title="Bienvenido" href="#">Maquina de estados</a>
         <div class="nav-collapse collapse">
           <ul class="nav">
             <li class="active">
               <a href="#">Calcular</a>
+            </li>
+            <li>
+              <a href="#manualUsuario">Manual de Usuario</a>
             </li>
             <li>
               <a href="#about">Sobre nosotros</a>
@@ -69,7 +72,7 @@
           <span id="error-estados" rel ="popover" data-placement="bottom" data-original-title="¡Ops algo anda mal!" class="text-error">
           <span id="error-secuencias" rel ="popover" data-placement="right" data-original-title="¡Ops algo anda mal!" class="text-error">
           
-          <button type="reset" class="btn btn-inverse">Reset</button>
+          <!--<button type="reset" class="btn btn-inverse">Reset</button>-->
         </span>
          </span>
 
@@ -102,21 +105,80 @@
 
                   </div>
                   <button id="capturar-secuencias" class=" btn  btn-primary  ">Iniciar Captura Secuencia</button>
-                  <button type="reset" class="btn btn-inverse">Reset</button>
+                  <!--<button type="reset" class="btn btn-inverse">Reset</button>-->
                   </form>
                       <div id="respuesta"class="alert alert-success" style="display:none;">
-    ...                 <strong> ¡Muy bien!</strong>
+                     <strong> ¡Muy bien!</strong>
                         <span></span>
                       </div>
-
-
-          </div>
+         </div>
         </div>
       </div>
     </div>
 
   </div>
   <!-- /container -->
+  
+  <div id="manualUsuario" class="container">
+  	<h2>Manual de Usuario</h2>
+  	<legend class="text-info">Introduccion</legend>
+
+  	<p align="justify">Una Máquina de Estado Finitos (Finite State Machine), llamada también Autómata Finito es una abstracción computacional que describe el 
+  		comportamiento de un sistema reactivo mediante un número determinado de Estados y un número determinado de Transiciones entre dicho Estados.
+		Las Transiciones de un estado a otro se generan en respuesta a eventos de entrada externos e internos; a su vez estas transiciones y/o subsecuentes 
+		estados pueden generar otros eventos de salida. Esta dependencia de las acciones (respuesta) del sistema a los eventos de entrada hace que las 
+		Máquinas de Estado Finito (MEF) sean una herramienta adecuada para el diseño de Sistemas Reactivos y la Programación Conducida por Eventos (Event 
+		Driven Programming), cual es el caso de la mayoría de los sietemas embebidos basados en microcontroladores o microprocesadores. Esta aplicacion permite
+		simular una Maquina de Estados Finitos, permitiendo al usuario elegir el tipo de flip flop (JK o RS).
+	</p>
+	
+	<legend class="text-info">Objetivo General</legend>
+	
+	<ul>
+		<li>Generar la ecuacion simplificada haciendo uso del Algoritmo de Quine McCluskey para cada variable teniendo en cuenta el tipo de flip flop elegido.</li>
+	</ul>
+	
+	<legend class="text-info">Objetivos Especificos</legend>
+	
+	<ul>
+		<li>Comparar el comportamiento de la maquina de estados eligiendo el flip flop JK y luego el flip flop RS.</li>
+		<li>Identificar las diferencias en las ecuaciones generadas al elegir cada flip flop.</li>
+	</ul>
+	
+	<legend class="text-info">Guia de uso</legend>
+	
+	<dl class="dl-horizontal">
+		<dt>Primer Paso</dt>
+		<dd><ul>
+				<li>Ingrese numereo de estados y secuencias.</li>
+				<li>Elija el tipo de Flip Flop con el cual desea iniciar la simulacion.</li>
+				<li>Luego oprima el boton Go!.</li>
+			</ul> 
+			<img src="img/paso1.png" class="img-rounded"/><br/>
+			<img src="img/paso1A.png" class="img-rounded"/>
+		</dd>
+		
+		<dt>Segundo Paso</dt>
+		<dd><ul><li>Elija la secuencia que va a ingresar y oprima el boton Iniciar Captura de Secuencia.</li></ul>
+			<img src="img/paso2.png" class="img-rounded"/><br/>
+		</dd>
+		<dt>Tercer Paso</dt>	
+		<dd><ul>
+				<li>Inicie la fijacion de la secuencia haciendo clic en origen y destino para cada "salto".</li>
+				<li>Luego oprima el boton Fijar Secuencia Actual.</li>
+				<li>Regrese al segundo paso para fijar las secuencias restantes.</li>
+			</ul>
+			<img src="img/paso3.png" class="img-rounded"/>
+		</dd>
+		<dt>Cuarto paso</dt>
+		<dd><ul><li>Oprima el boton generar ecuaciones.</li></ul>
+			<img src="img/paso4.png" class="img-rounded"/>
+		</dd>
+		
+	</dl>
+	
+  </div>
+  
 
   <!-- Le javascript
     ================================================== -->
@@ -126,9 +188,13 @@
   <script src="js/flechas.js"></script>
   <script src="js/estados.js"></script>
   <script src="js/cliente.js"></script>
+  <script src="js/maquinaApi.js"></script>
   <script >
     
 
     </script>
+    
+    
+    
 </body>
 </html>

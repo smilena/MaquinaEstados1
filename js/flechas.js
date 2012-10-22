@@ -86,8 +86,7 @@ function calccoord (canvas, div, side) {
 
         //drawing arrow
 
-
-       
+   
     }
 
 })(window) ;
