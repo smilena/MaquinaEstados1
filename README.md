@@ -4,7 +4,7 @@ MaquinaEstados
 Simulacion Maquina de estados utilizando flip-flop JK y RS
 
 
-<img src="https://raw.github.com/danyjavierb/MaquinaEstados1/master/pantallazo.png?raw=true" />
+<img src="https://raw.github.com/danyjavierb/MaquinaEstados1/master/pantallazo.png?raw=true" />https://github.com/danyjavierb/MaquinaEstados1/blob/master/README.md
 
 La logica del proyecto esta escrita totalmente en javascript, la presentacion usa herramientas como jquery,bootstrap y varias API's de html5.
 Este proyecto se desarrollo en un tiempo muy corto, y hay todavia muchas cosas por hacer, estamos seguros que a los estudiantes de 
@@ -12,7 +12,7 @@ carreras como ingenieria electrica , electronica y ciencias de la computacion, t
 Por lo mismo tus pull request siempre seran bien recibidas.
 
 Puedes encontrar mas informacion en <a href="http://www.danybau.com/2012/11/04/maquina-estados-html5-javascript">Simulando una maquina de estados usando Html5</a>
-O probar la aplicacion en: <a href=" http://www.danybau.com/demos/maquinaestados" >Demo maquina de estados</a>
+O probar la aplicacion en: <a href="http://www.danybau.com/demos/maquinaestados">Demo maquina de estados</a>
 
 
 <a href="https://twitter.com/danyjavierb">@danyjavierb</a>
