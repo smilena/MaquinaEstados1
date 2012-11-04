@@ -11,7 +11,7 @@ Este proyecto se desarrollo en un tiempo muy corto, y hay todavia muchas cosas p
 carreras como ingenieria electrica , electronica y ciencias de la computacion, tendran una asignacion como esta en algun momento de sus estudios de pregrado.
 Por lo mismo tus pull request siempre seran bien recibidas.
 
-Puedes encontrar mas informacion en <a href="http://www.danybau.com/2012/11/04/maquina-estados-html5-javascript">Simulando una maquina de estados usando Html5/</a>
+Puedes encontrar mas informacion en <a href="http://www.danybau.com/2012/11/04/maquina-estados-html5-javascript">Simulando una maquina de estados usando Html5</a>
 O probar la aplicacion en: <a href=" http://www.danybau.com/demos/maquinaestados" >Demo maquina de estados</a>
 
 
